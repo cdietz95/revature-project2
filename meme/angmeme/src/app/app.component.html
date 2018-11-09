@@ -1,0 +1,66 @@
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br>
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Newest')">Newest</button>
+  <button class="tablinks" onclick="openTab(event, 'MostP')">Most Popular</button>
+  <button class="tablinks" onclick="openTab(event, 'MostV')">Most Viewed</button>
+</div>
+<h1>Newest Memes</h1>
+<!-- The Modal -->
+<div class="space">
+  <cl-image (click)="openMeme($event)" id="myImg" *ngFor="let pic of pics"
+            public-id= "{{ pic }}"
+            type="fetch">
+    <cl-transformation
+      width="300" height="300" gravity="face" crop="fill" fetch-format="auto">
+    </cl-transformation>
+  </cl-image>
+</div>
+<div id="myModal" class="modal">
+  <span (click)="closeMeme($event)" class="close">&times;</span>
+  <img [src]="url" class="modal-content" id="img01">
+  <div id="caption">
+    <input type="text" value="Comments" placeholder="Comment">
+    <br>
+    <br>
+    <button class="dislike">
+      <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+    </button>
+    <button class="like">
+      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<br>
+<br>
+<input type="file" (change)="onFileSelected($event)">
+<br>
+<br>
+<button type="button" (click)="onUpload($event)">Upload</button>
+<br>
+<br>
+<div id="after" (change)="onFileSelected($event)">
+  <div id="myModals" class="modals">
+    <div class="modal-contents">
+      <form class="form-viewInfo">
+        <section class="form-center">
+          <div class="form-group">
+            <label class="label-viewInfo" for="title"> <b>Title:</b></label>
+            <input class="input-viewInfo" type="text" id="title" name="title" required><br>
+          </div>
+          <div class="form-group">
+            <label class="label-viewInfo" for="captions"> <b>Caption:</b></label>
+            <input class="input-viewInfo" type="text" id="captions" name="captions" required><br>
+          </div>
+          <br>
+          <input class="saveChangesButton" type="submit" value="Save Changes" (click)="saveChanges($event)">
+        </section>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="success" class="alert alert-success">
+  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
