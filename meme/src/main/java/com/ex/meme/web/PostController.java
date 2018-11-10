@@ -50,6 +50,8 @@ public class PostController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/post")
     public ResponseEntity addPost(@RequestBody Post p, HttpServletResponse resp) {
+
+        System.out.println(p.toString());
 //        addSuit(s);
 //        Post p = new Post();
 
@@ -65,15 +67,18 @@ public class PostController {
 //
 //        System.out.println("targetnum is " + targetNum);
 
-//        User u = new User();
-//
-//        u = userService.getUser(targetNum);
-//
-//        System.out.println(u.toString());
-//
-//        p.setAuthor(u);
-//
-//        System.out.println(p.toString());
+        User u = p.getAuthor();
+
+
+        System.out.println(u.toString());
+
+        //u = userService.getUser();
+
+        System.out.println(u.toString());
+
+        p.setAuthor(u);
+
+        System.out.println(p.toString());
 
 
         postService.addPost(p);

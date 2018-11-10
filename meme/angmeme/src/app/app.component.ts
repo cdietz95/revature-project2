@@ -84,11 +84,13 @@ function imageSaver(event, res) {
   console.log("got to image saver");
   fetch('http://localhost:8080/post-api/post', {
     method: 'POST',
-    // headers: {
-    //     'Authorization': 'Bearer ' + localStorage.getItem('profile')
-    // },
+    headers: {
+      'Content-Type': 'application/json'
+        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+
+    },
     body: JSON.stringify({
-      // userId: localStorage.getItem('userId'),
+      author: '1',
       title: (<HTMLInputElement>document.getElementById('title')).value,
       caption: (<HTMLInputElement>document.getElementById('captions')).value,
       url: res.data.public_id
