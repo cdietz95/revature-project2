@@ -37,36 +37,13 @@ public class PostController {
         return postService.getAllPost();
     }
 
-/*    @PostMapping(value = "/post", consumes="application/json")
-    public void addSuit(@RequestBody Post p, HttpServletResponse resp) {
-//        addSuit(s);
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value = "/post")
+    public ResponseEntity addPost(@RequestBody Post p, HttpServletResponse resp) {
+
         System.out.println(p.toString());
-        postService.addPost(p);
-        resp.setStatus(201);
-        resp.setHeader("Location", "http://localhost:8080/post-api/post/" + p.getId());
-    }*/
 
-    //@PostMapping(value = "/post", consumes="application/json")
-    @GetMapping(value = "/post", consumes = "application/json")
-    public void addPost(HttpServletRequest req, HttpServletResponse resp) {
-//        addSuit(s);
-        Post p = new Post();
-
-        System.out.println(req.getParameter("title"));
-
-        p.setTitle(req.getParameter("title"));
-        p.setUrl(req.getParameter("url"));
-        p.setCaption(req.getParameter("caption"));
-
-        System.out.println(req.getParameter("authorNumber"));
-
-        int targetNum = Integer.parseInt(req.getParameter("authorNumber"));
-
-        System.out.println("targetnum is " + targetNum);
-
-        User u = new User();
-
-        u = userService.getUser(targetNum);
+        User u = p.getAuthor();
 
         System.out.println(u.toString());
 
@@ -76,8 +53,9 @@ public class PostController {
 
 
         postService.addPost(p);
-        resp.setStatus(201);
+//        resp.setStatus(201);
         resp.setHeader("Location", "http://localhost:8080/post-api/post/" + p.getId());
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }
