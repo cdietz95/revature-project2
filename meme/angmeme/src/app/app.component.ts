@@ -21,6 +21,56 @@ export class AppComponent {
 
   constructor(private http: HttpClient) {};
 
+  onInit() {
+    fetch('http://localhost:8080/post-api', {
+      method: 'GET',
+      headers: {
+        'Content-Type' : 'application/json',
+      }
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        if (res.status == 401 || res.status == 400) {
+          throw{};
+        }
+      }
+    }).catch(error => {
+    });
+  }
+
+  onCreate(event){
+    fetch('http://localhost:8080/user-api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+
+      },
+      body: JSON.stringify({
+        username: (<HTMLInputElement>document.getElementById('uname')).value,
+        password: (<HTMLInputElement>document.getElementById('pw')).value,
+        email: (<HTMLInputElement>document.getElementById('email')).value,
+        firstName: (<HTMLInputElement>document.getElementById('fname')).value,
+        lastName: (<HTMLInputElement>document.getElementById('lname')).value,
+      })
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        if (res.status == 401 || res.status == 400) {
+          throw{};
+        }
+      }
+    }).then(token => {
+      localStorage.setItem('profile',token.idToken);
+      localStorage.setItem('username', token.userName);
+      localStorage.setItem('userId', token.userId);
+      location.href = "http://localhost:4200";
+    }).catch(error => {
+    });
+  }
+
   onLogin(event){
     event.preventDefault();
     fetch('http://localhost:8080/user-api/login', {
@@ -31,7 +81,7 @@ export class AppComponent {
 
       },
       body: JSON.stringify({
-        username: (<HTMLInputElement>document.getElementById('un')).value,
+        username: (<HTMLInputElement>document.getElementById('uname')).value,
         password: (<HTMLInputElement>document.getElementById('pw')).value
       })
     }).then(res => {

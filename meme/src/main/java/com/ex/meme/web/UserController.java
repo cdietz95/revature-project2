@@ -9,10 +9,9 @@ import com.ex.meme.services.PostService;
 import com.ex.meme.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,14 +78,15 @@ public class UserController
         }
     }
 
-    @PostMapping(value = "/create", consumes="application/json")
+//    @CrossOrigin(origins = "http://localhost:4200")
     //@GetMapping(value = "/comment", consumes = "application/json")
-    public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        User u = new ObjectMapper().readValue(req.getInputStream(), User.class);
+@CrossOrigin(origins = "*")
+@PostMapping(value = "/user")
+public ResponseEntity createUser(@RequestBody User u, HttpServletResponse resp) {
 
         userService.addUser(u);
-
+        resp.setHeader("Location", "http://localhost:8080/user" + u.getId());
+        return new ResponseEntity(HttpStatus.CREATED);
 
     }
 }

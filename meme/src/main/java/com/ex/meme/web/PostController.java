@@ -32,12 +32,12 @@ public class PostController {
         this.userService = userService;
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping()
     public List<Post> getAllPost() {
         return postService.getAllPost();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/post")
     public ResponseEntity addPost(@RequestBody Post p, HttpServletResponse resp) {
 
