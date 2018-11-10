@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -66,8 +67,7 @@ public class UserController
             return;
         }
     }
-    //    @CrossOrigin(origins = "http://localhost:4200")
-    //@GetMapping(value = "/comment", consumes = "application/json")
+
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/user")
     public ResponseEntity createUser(@RequestBody User u, HttpServletResponse resp) {
@@ -76,3 +76,21 @@ public class UserController
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }
+
+
+
+
+
+
+//    @CrossOrigin(origins = "http://localhost:4200")
+//@GetMapping(value = "/comment", consumes = "application/json")
+//@CrossOrigin(origins = "*")
+//@PostMapping(value = "/user")
+//public ResponseEntity createUser(@RequestBody User u, HttpServletResponse resp) {
+//
+//    userService.addUser(u);
+//    resp.setHeader("Location", "http://localhost:8080/user" + u.getId());
+//    return new ResponseEntity(HttpStatus.CREATED);
+//}
+//    //    @CrossOrigin(origins = "http://localhost:4200")
+//    //@GetMapping(value = "/comment", consumes = "application/json")

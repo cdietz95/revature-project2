@@ -32,23 +32,32 @@ public class PostController {
         this.userService = userService;
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping()
     public List<Post> getAllPost() {
         return postService.getAllPost();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/post")
     public ResponseEntity addPost(@RequestBody Post p, HttpServletResponse resp) {
 
         System.out.println(p.toString());
 
-        User u = p.getAuthor();
+        /*User u = p.getAuthor();
+
+        System.out.println(u.toString());
+
+        p.setAuthor(u);*/
+
+        int target = p.getAuthor().getId();
+
+        System.out.println(target);
+
+        User u = userService.getUser(target);
 
         System.out.println(u.toString());
 
         p.setAuthor(u);
-
         System.out.println(p.toString());
 
 

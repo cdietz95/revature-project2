@@ -7,11 +7,13 @@ import * as Cloudinary from 'cloudinary-core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ImagesComponent } from './images/images.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,

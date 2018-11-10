@@ -29,6 +29,11 @@ public class User {
     public User() {
     }
 
+    public User(String myUserID)
+    {
+        this.setId(Integer.parseInt(myUserID));
+    }
+
     public User(String email, String firstName, String lastName, String password, String username) {
         this.email = email;
         this.firstName = firstName;
