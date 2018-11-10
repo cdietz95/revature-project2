@@ -21,37 +21,6 @@ export class AppComponent {
 
   constructor(private http: HttpClient) {};
 
-  onLogin(event){
-    event.preventDefault();
-    fetch('http://localhost:8080/user-api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
-
-      },
-      body: JSON.stringify({
-        username: (<HTMLInputElement>document.getElementById('un')).value,
-        password: (<HTMLInputElement>document.getElementById('pw')).value
-      })
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        if (res.status == 401 || res.status == 400) {
-          throw{};
-        }
-      }
-    }).then(token => {
-      localStorage.setItem('profile',token.idToken);
-      localStorage.setItem('username', token.userName);
-      localStorage.setItem('userId', token.userId);
-      location.href = "http://localhost:4200";
-    }).catch(error => {
-    });
-  }
-
-
   openMeme(event){
     event.preventDefault();
     document.getElementById('myModal').style.display = "block";
