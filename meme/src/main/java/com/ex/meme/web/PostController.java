@@ -47,37 +47,39 @@ public class PostController {
     }*/
 
     //@PostMapping(value = "/post", consumes="application/json")
-    @GetMapping(value = "/post", consumes = "application/json")
-    public void addPost(HttpServletRequest req, HttpServletResponse resp) {
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value = "/post")
+    public ResponseEntity addPost(@RequestBody Post p, HttpServletResponse resp) {
 //        addSuit(s);
-        Post p = new Post();
+//        Post p = new Post();
 
-        System.out.println(req.getParameter("title"));
+//        System.out.println(req.getParameter("title"));
+//
+//        p.setTitle(req.getParameter("title"));
+//        p.setUrl(req.getParameter("url"));
+//        p.setCaption(req.getParameter("caption"));
+//
+//        System.out.println(req.getParameter("authorNumber"));
+//
+//        int targetNum = Integer.parseInt(req.getParameter("authorNumber"));
+//
+//        System.out.println("targetnum is " + targetNum);
 
-        p.setTitle(req.getParameter("title"));
-        p.setUrl(req.getParameter("url"));
-        p.setCaption(req.getParameter("caption"));
-
-        System.out.println(req.getParameter("authorNumber"));
-
-        int targetNum = Integer.parseInt(req.getParameter("authorNumber"));
-
-        System.out.println("targetnum is " + targetNum);
-
-        User u = new User();
-
-        u = userService.getUser(targetNum);
-
-        System.out.println(u.toString());
-
-        p.setAuthor(u);
-
-        System.out.println(p.toString());
+//        User u = new User();
+//
+//        u = userService.getUser(targetNum);
+//
+//        System.out.println(u.toString());
+//
+//        p.setAuthor(u);
+//
+//        System.out.println(p.toString());
 
 
         postService.addPost(p);
-        resp.setStatus(201);
+//        resp.setStatus(201);
         resp.setHeader("Location", "http://localhost:8080/post-api/post/" + p.getId());
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }
