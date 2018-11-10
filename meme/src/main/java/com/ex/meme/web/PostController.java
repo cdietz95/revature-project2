@@ -43,12 +43,21 @@ public class PostController {
 
         System.out.println(p.toString());
 
-        User u = p.getAuthor();
+        /*User u = p.getAuthor();
+
+        System.out.println(u.toString());
+
+        p.setAuthor(u);*/
+
+        int target = p.getAuthor().getId();
+
+        System.out.println(target);
+
+        User u = userService.getUser(target);
 
         System.out.println(u.toString());
 
         p.setAuthor(u);
-
         System.out.println(p.toString());
 
 
