@@ -6,18 +6,9 @@ public class TokenDTO
 {
     private String idToken;
     private String userName;
-    private Collection roles;
     private int userId;
 
     public TokenDTO() { }
-
-    public Collection getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection roles) {
-        this.roles = roles;
-    }
 
     public String getUserName() {
         return userName;
@@ -48,7 +39,6 @@ public class TokenDTO
         return "TokenDTO{" +
                 "idToken='" + idToken + '\'' +
                 ", userName='" + userName + '\'' +
-                ", roles=" + roles +
                 ", userId=" + userId +
                 '}';
     }

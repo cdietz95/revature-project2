@@ -6,6 +6,18 @@
   <button class="tablinks" onclick="openTab(event, 'MostP')">Most Popular</button>
   <button class="tablinks" onclick="openTab(event, 'MostV')">Most Viewed</button>
 </div>
+<form>
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" id="un" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="pw" required>
+
+    <button type="submit" (click)="onLogin($event)">Login</button>
+  </div>
+</form>
+
 <h1>Newest Memes</h1>
 <!-- The Modal -->
 <div class="space">
