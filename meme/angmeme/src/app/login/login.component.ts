@@ -12,4 +12,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  noLogin =() => {
+    document.getElementById("loginWrapper").style.display = 'none'
+    document.getElementById("createLoginWrapper").style.display = 'block'
+    // document.getElementById('noLogin').checked = false
+  }
+
+
+  haveLogin = () => {
+    document.getElementById("loginWrapper").style.display = 'block'
+    document.getElementById("createLoginWrapper").style.display = 'none';
+    // document.getElementById('haveLogin').checked = false
+  }
+
 }

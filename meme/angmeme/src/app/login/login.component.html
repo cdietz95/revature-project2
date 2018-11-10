@@ -1,3 +1,83 @@
-<p>
-  login works!
-</p>
+<section  id="loginWrapper" ng-show="noLogin">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <form action="form" class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label><input type="checkbox" name="remember"> Remember me</label>&nbsp;&nbsp;
+          <label><input type="checkbox" name="noLogin" (click)="noLogin()">Don't have a Login?</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" id="login-submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</section>
+<section id="createLoginWrapper">
+  <!--TODO should we make this it's own web component? used in a couple different places-->
+  <p>Please fill out all of the following fields:</p>
+  <form action="form1" class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="firstName">First Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" name="firstName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="emplType">Employee Type:</label>
+      <div class="col-sm-10">
+        <!--TODO grab options from database and auto populate this part. Don't want it to be static-->
+        <select class="form-control" id="emplType" name="emplType" required>
+          <option value="1">Employee</option>
+          <option value="2">Manager</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="email1" placeholder="Enter email" name="email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="pwd1" placeholder="Enter password" name="pwd">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <!--<label><input type="checkbox" name="remember"> Remember me</label>&nbsp;&nbsp;-->
+          <label><input type="checkbox" name="haveLogin" (click)="haveLogin()">I have a login actually</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" id="createLogin">Submit</button>
+      </div>
+    </div>
+  </form>
+</section>
