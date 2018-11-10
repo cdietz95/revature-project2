@@ -50,7 +50,7 @@ public class UserService {
         return userDao.save(u).getId();
     }
 
-    public User getUserByEmailAndPassword(String email, String password) { return userDao.findByEmailAndPassword(email, password);}
+    public User getUserByEmailAndPassword(String username, String password) { return userDao.findByUsernameAndPassword(username, password);}
 
     public TokenDTO getToken(User e, long tll) throws UnsupportedEncodingException
     {
@@ -62,14 +62,12 @@ public class UserService {
                 .setSubject(e.getEmail())
                 .setIssuedAt(now)
                 .setExpiration(future)
-                .claim("employee", e.getEmail())
-                .claim( "roles", new ArrayList<String>())
+                .claim("user", e.getUsername())
                 .signWith(SignatureAlgorithm.HS256, "mySecret".getBytes("UTF-8"))
                 .compact();
 
         token.setIdToken(jwt);
         token.setUserName(e.getUsername());
-        token.setRoles(new ArrayList<String>());
         token.setUserId(e.getId());
 
         return token;

@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<User, Integer> {
     User findByEmail(String email);
-    User findByEmailAndPassword(String email, String password);
+    User findByUsernameAndPassword(String username, String password);
 }

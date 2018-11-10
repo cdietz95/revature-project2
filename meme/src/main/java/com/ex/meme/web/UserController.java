@@ -45,21 +45,21 @@ public class UserController
 
         User e = new ObjectMapper().readValue(req.getInputStream(), User.class);
 
-        if(e.getEmail() == null || e.getPassword() == null)
+        if(e.getUsername() == null || e.getPassword() == null)
         {
             resp.setStatus(400);
-            System.out.println("email or password is null");
+            System.out.println("username or password is null");
             return;
         }else {
             //e = service.getOne(e.getEmail(), e.getHash());
-            e = userService.getUserByEmailAndPassword(e.getEmail(), e.getPassword());
+            e = userService.getUserByEmailAndPassword(e.getUsername(), e.getPassword());
         }
 
         if(e != null)
         {
             try
             {
-                TokenDTO token = userService.getToken(e, 3600000);
+                TokenDTO token = userService.getToken(e, 360000000);
                 resp.getWriter().write(new ObjectMapper().writeValueAsString(token));
                 resp.setStatus(200);
                 //logger.info("Account : " + e.toString() + " logged in");
