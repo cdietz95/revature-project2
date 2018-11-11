@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +11,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  @Output()
+  loggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   noLogin =() => {
     document.getElementById("loginWrapper").style.display = 'none'
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(event){
     event.preventDefault();
+
     fetch('http://localhost:8080/user-api/login', {
       method: 'POST',
       headers: {
@@ -47,12 +51,17 @@ export class LoginComponent implements OnInit {
         }
       }
     }).then(token => {
+      this.emit();
       localStorage.setItem('profile',token.idToken);
       localStorage.setItem('username', token.userName);
       localStorage.setItem('userId', token.userId);
       location.href = "http://localhost:4200";
     }).catch(error => {
     });
+  }
+
+  emit(){
+    this.loggedIn.emit(true);
   }
 
   onCreate(event){

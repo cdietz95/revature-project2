@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import axios from 'axios';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +6,12 @@ import axios from 'axios';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  loggedIn: boolean = false;
+  isLogged(logged:boolean) {
+    console.log("event fired " + this.loggedIn);
+    this.loggedIn = logged;
+    console.log("event fired 2 " + this.loggedIn);
+  }
 
 }

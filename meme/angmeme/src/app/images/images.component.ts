@@ -78,7 +78,7 @@ export class ImagesComponent implements OnInit {
 
   thumbs(thmbType){
     console.log("thumb type is " + thmbType)
-    console.log(document.getElementById("img01").src);
+    // console.log(document.getElementById("img01").src);
 
     fetch('http://localhost:8080/vote-api/vote', {
       method: 'GET',
@@ -90,7 +90,7 @@ export class ImagesComponent implements OnInit {
       body: JSON.stringify({
         userID: localStorage.getItem('userId'),
         voteValue: thmbType,
-        postId: document.getElementById('img01').src,
+        // postId: document.getElementById('img01').src,
       })
     }).then(res => {
       if (res.ok) {

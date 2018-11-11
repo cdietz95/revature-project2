@@ -1,6 +1,6 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <br>
-<app-login></app-login>
-<app-images></app-images>
+<app-login *ngIf="!loggedIn" (loggedIn)="isLogged($event)">Loading...</app-login>
+<app-images *ngIf="loggedIn"></app-images>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
