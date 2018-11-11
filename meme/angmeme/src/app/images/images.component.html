@@ -5,17 +5,22 @@
 </div>
 <h1>Newest Memes</h1>
 <!-- The Modal -->
-<div class="space">
-  <cl-image (click)="openMeme($event)" id="myImg" *ngFor="let pic of pics"
-            public-id= "{{ pic }}"
+<div class="space" *ngFor='let p of post'>
+  <div id="head"><h3 id="imgTitle">{{ p.title }}</h3>
+    <br>
+    <p id="imgCaption">{{ p.caption }}</p>
+  </div>
+  <cl-image (click)="openMeme($event)" id="myImg"
+            public-id= "{{ p.url }}"
             type="fetch">
     <cl-transformation
-      width="300" height="300" gravity="face" crop="fill" fetch-format="auto">
+      width="400" height="400" gravity="face" crop="fill" fetch-format="auto">
     </cl-transformation>
   </cl-image>
 </div>
 <div id="myModal" class="modal">
   <span (click)="closeMeme($event)" class="close">&times;</span>
+
   <img [src]="url" class="modal-content" id="img01">
   <div id="caption">
     <input type="text" value="Comments" placeholder="Comment">
@@ -32,9 +37,6 @@
 <br>
 <br>
 <input type="file" (change)="onFileSelected($event)">
-<br>
-<br>
-<button type="button" (click)="onUpload($event)">Upload</button>
 <br>
 <br>
 <div id="after" (change)="onFileSelected($event)">

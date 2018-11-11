@@ -8,28 +8,11 @@ import axios from "axios";
   styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
+  title = 'memeapp';
+  url: String = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
+  post;
 
   ngOnInit() {
-  }
-
-  title = 'memeapp';
-
-  //array of pics
-  //conca to that url
-  //set that to pics
-  url: String = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
-  pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
-    this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
-    this.url.concat('test/tgi3c18mm5tp9e03pm48.png'), this.url.concat('test/remokdpfydqh9ronf0gd.png'), this.url.concat('test/tr6ov0wld5tjcolkkaio.jpg')];
-
-  CLOUDINARY_URL: String  = 'https://api.cloudinary.com/v1_1/memecloud/upload/';
-  CLOUDINARY_UPLOAD_PRESET: String = 'mybmtjtx';
-
-  selectedFile: File = null;
-
-  constructor(private http: HttpClient) {};
-
-  onInit() {
     fetch('http://localhost:8080/post-api', {
       method: 'GET',
       headers: {
@@ -44,11 +27,23 @@ export class ImagesComponent implements OnInit {
         }
       }
     }).then( val => {
-
-
-        }).catch(error => {
+      console.log(val);
+      let len = val.length;
+      this.post = val;
+    }).catch(error => {
     });
   }
+
+  // pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
+  //   this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
+  //   this.url.concat('test/tgi3c18mm5tp9e03pm48.png'), this.url.concat('test/remokdpfydqh9ronf0gd.png'), this.url.concat('test/tr6ov0wld5tjcolkkaio.jpg')];
+
+  CLOUDINARY_URL: String  = 'https://api.cloudinary.com/v1_1/memecloud/upload/';
+  CLOUDINARY_UPLOAD_PRESET: String = 'mybmtjtx';
+
+  selectedFile: File = null;
+
+  constructor(private http: HttpClient) {};
 
 
   openMeme(event){
@@ -111,7 +106,11 @@ export class ImagesComponent implements OnInit {
 
 
 function imageSaver(event, res) {
+
+  const url='https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/';
+
   console.log("got to image saver");
+  console.log(url)
   fetch('http://localhost:8080/post-api/post', {
     method: 'POST',
     headers: {
@@ -120,10 +119,10 @@ function imageSaver(event, res) {
 
     },
     body: JSON.stringify({
-      author: '1',
+      author: localStorage.getItem('userId'),
       title: (<HTMLInputElement>document.getElementById('title')).value,
       caption: (<HTMLInputElement>document.getElementById('captions')).value,
-      url: res.data.public_id
+      url: url.concat(res.data.public_id)
     })
   }).then(res => {
     if (res.ok) {
