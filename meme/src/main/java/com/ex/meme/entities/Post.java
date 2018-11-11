@@ -31,6 +31,17 @@ public class Post {
         onCreate();
     }
 
+    /*public Post(String myPostID)
+    {
+        this.setId(Integer.parseInt(myPostID));
+    }*/
+
+    public Post(String myPostUrl)
+    {
+        this.setUrl(myPostUrl);
+    }
+
+
     public Post(String url, String caption, String title, LocalDateTime createDateTime, User author) {
         this.url = url;
         this.caption = caption;

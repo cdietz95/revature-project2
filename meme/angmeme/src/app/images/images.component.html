@@ -13,9 +13,6 @@
   <cl-image (click)="openMeme($event)" id="myImg"
             public-id= "{{ p.url }}"
             type="fetch">
-    <cl-transformation
-      width="400" height="400" gravity="face" crop="fill" fetch-format="auto">
-    </cl-transformation>
   </cl-image>
 </div>
 <div id="myModal" class="modal">
@@ -23,7 +20,8 @@
 
   <img [src]="url" class="modal-content" id="img01">
   <div id="caption">
-    <input type="text" value="Comments" placeholder="Comment">
+    <input type="text" value="Comments" id="commentBox" placeholder="Comment">
+    <button type="submit"id="comment-submit" (click)="comment($event)">Comment</button>
     <br>
     <br>
     <button class="dislike">
@@ -32,6 +30,21 @@
     <button class="like">
       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
     </button>
+    <div class="media">
+      <div class="media-left">
+      </div>
+      <br>
+      <div class="media-body" *ngFor='let c of comments'>
+        <br>
+        <div>
+        <h4 id="commentUserName" class="media-heading">{{c.userID.username}}</h4>
+        <br>
+      <p id="commentContent">{{c.content}}</p>
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
   </div>
 </div>
 <br>

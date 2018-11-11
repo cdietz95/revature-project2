@@ -10,7 +10,9 @@ import com.ex.meme.services.PostService;
 import com.ex.meme.services.UserService;
 import com.ex.meme.services.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,57 +40,72 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    /*@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public List<Comment> getAllComment() {
         return commentService.getAllComment();
-    }
-
-/*    @PostMapping(value = "/post", consumes="application/json")
-    public void addSuit(@RequestBody Post p, HttpServletResponse resp) {
-//        addSuit(s);
-        System.out.println(p.toString());
-        postService.addPost(p);
-        resp.setStatus(201);
-        resp.setHeader("Location", "http://localhost:8080/post-api/post/" + p.getId());
     }*/
 
-    //@PostMapping(value = "/post", consumes="application/json")
-    @GetMapping(value = "/comment", consumes = "application/json")
-    public void addPost(HttpServletRequest req, HttpServletResponse resp) {
-        Comment c = new Comment();
+    @PostMapping(value="/{c}", produces = "application/json", consumes = "application/json")
+    public List<Comment> getAllCommentByPostID(@RequestBody Comment c, HttpServletResponse resp) {
 
-        c.setContent(req.getParameter("content"));
+        String target2 = c.getPostId().getUrl();
 
-        System.out.println(req.getParameter("content"));
+//        String target2 = "https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/test/tuiixmmajbeefqhd1wtf";
 
-        int userNum = Integer.parseInt(req.getParameter("userID"));
 
-        System.out.println("userNum is " + userNum);
+        System.out.println("Looking for post url: " +target2);
 
-        User u = new User();
+        Post p = postService.getPostByUrl(target2);
 
-        u = userService.getUser(userNum);
 
-        System.out.println(u.toString());
+//        System.out.println("This is the comments from the Database: " + p.toString());
+        List<Comment> coms = commentService.getAllByPost(p);
+        System.out.println("next line is coms");
+        for( Comment x : coms ) {
+            System.out.println(x.toString());
+        }
+
+        resp.setHeader("Location", "http://localhost:8080/comment-api" + p.getId());
+
+
+        return commentService.getAllByPost(p);
+
+
+    }
+
+    @PostMapping(value = "/comment")
+    public ResponseEntity addPost(@RequestBody Comment c, HttpServletResponse resp) {
+
+        int target = c.getUserID().getId();
+
+        System.out.println("Looking for user ID: " + target);
+
+        User u = userService.getUser(target);
+
+        System.out.println("This is the user from the Database: " + u.toString());
 
         c.setUserID(u);
+        //System.out.println(c.toString());
 
-        int postNum = Integer.parseInt(req.getParameter("postId"));
+        //////////////////////////////////////////////////
 
-        System.out.println("postNUm is " + postNum);
+        //int target2 = c.getPostId().getId();
+        String target2 = c.getPostId().getUrl();
 
-        Post p = new Post();
 
-        p = postService.getPost(postNum);
+        System.out.println("Looking for post url: " +target2);
 
-        System.out.println(p.toString());
+        Post p = postService.getPostByUrl(target2);
+
+        System.out.println("This is the post from the Database: " +p.toString());
 
         c.setPostId(p);
-
+        System.out.println("Comment to be saved ! "  + c.toString());
 
         commentService.addComment(c);
-        resp.setStatus(201);
+//        resp.setStatus(201);
         resp.setHeader("Location", "http://localhost:8080/comment-api/comment/" + c.getId());
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }

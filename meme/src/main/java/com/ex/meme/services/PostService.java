@@ -36,6 +36,17 @@ public class PostService {
         }
     }
 
+    @Transactional(readOnly=true)
+    public Post getPostByUrl(String url) {
+
+        System.out.println("Service URL : " + url);
+
+        Post p = postDao.findByUrl(url);
+        System.out.println("Service Post"+p.toString());
+        return p;
+    }
+
+
     public Integer addPost(Post p) {
         return postDao.save(p).getId();
     }

@@ -34,6 +34,7 @@ public class Comment {
     public Comment() {onCreate();
     }
 
+
     public Comment(String content, LocalDateTime createDateTime, User userID, Post postId) {
         this.content = content;
         this.createDateTime = createDateTime;
@@ -79,5 +80,16 @@ public class Comment {
 
     public void setPostId(Post postId) {
         this.postId = postId;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", createDateTime=" + createDateTime +
+                ", userID=" + userID +
+                ", postId=" + postId +
+                '}';
     }
 }
