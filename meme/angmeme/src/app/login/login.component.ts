@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(event){
-    event.preventDefault();
+    event.preventDefault()
     fetch('http://localhost:8080/user-api/login', {
       method: 'POST',
       headers: {

@@ -147,7 +147,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "/* Style the tab */\r\n.tab {\r\n  overflow: hidden;\r\n  border: 1px solid #ccc;\r\n  background-color: #f1f1f1;\r\n  width: 23.2%;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n}\r\n/* Style the buttons inside the tab */\r\n.tab button {\r\n  background-color: inherit;\r\n  float: left;\r\n  border: 1px solid #ccc;\r\n  outline: none;\r\n  cursor: pointer;\r\n  padding: 14px 16px;\r\n  transition: 0.3s;\r\n  font-size: 17px;\r\n}\r\n/* Change background color of buttons on hover */\r\n.tab button:hover {\r\n  background-color: #ddd;\r\n}\r\n/* Create an active/current tablink class */\r\n.tab button.active {\r\n  background-color: #ccc;\r\n}\r\nbody {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\n#after{\r\n  display: none;\r\n}\r\n/* The Modal (background) */\r\n.modals {\r\n  position: fixed; /* Stay in place */\r\n  z-index: 1; /* Sit on top */\r\n  padding-top: 100px; /* Location of the box */\r\n  left: 0;\r\n  top: 0;\r\n  width: 100%; /* Full width */\r\n  height: 100%; /* Full height */\r\n  overflow: auto; /* Enable scroll if needed */\r\n  background-color: rgb(0,0,0); /* Fallback color */\r\n  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */\r\n}\r\n/* Modal Content */\r\n.modal-contents {\r\n  background-color: #fefefe;\r\n  margin: auto;\r\n  padding: 20px;\r\n  border: 1px solid #888;\r\n  width: 500px;\r\n  clear: both;\r\n}\r\n/* The Close Button */\r\n.closes {\r\n  color: #aaaaaa;\r\n  float: right;\r\n  font-size: 28px;\r\n  font-weight: bold;\r\n}\r\n.closes:hover,\r\n.closes:focus {\r\n  color: #000;\r\n  text-decoration: none;\r\n  cursor: pointer;\r\n}\r\n.space{\r\n  margin-left: 3px;\r\n}\r\n#myImg {\r\n  border-radius: 5px;\r\n  cursor: pointer;\r\n  transition: 0.3s;\r\n}\r\n#myImg:hover {opacity: 0.7;}\r\n/* The Modal (background) */\r\n.modal {\r\n  display: none; /* Hidden by default */\r\n  position: fixed; /* Stay in place */\r\n  z-index: 1; /* Sit on top */\r\n  padding-top: 100px; /* Location of the box */\r\n  left: 0;\r\n  top: 0;\r\n  width: 100%; /* Full width */\r\n  height: 100%; /* Full height */\r\n  overflow: auto; /* Enable scroll if needed */\r\n  background-color: rgb(0,0,0); /* Fallback color */\r\n  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */\r\n}\r\n/* Modal Content (image) */\r\n.modal-content {\r\n  margin: auto;\r\n  display: block;\r\n  width: 100%;\r\n  max-width: 500px;\r\n}\r\n/* Caption of Modal Image */\r\n#caption {\r\n  margin: auto;\r\n  display: block;\r\n  width: 80%;\r\n  max-width: 700px;\r\n  text-align: center;\r\n  color: #ccc;\r\n  padding: 10px 0;\r\n  height: 150px;\r\n}\r\n/* Add Animation */\r\n.modal-content, #caption {\r\n  -webkit-animation-name: zoom;\r\n  -webkit-animation-duration: 0.6s;\r\n  animation-name: zoom;\r\n  animation-duration: 0.6s;\r\n}\r\n@-webkit-keyframes zoom {\r\n  from {-webkit-transform:scale(0)}\r\n  to {-webkit-transform:scale(1)}\r\n}\r\n@keyframes zoom {\r\n  from {-webkit-transform:scale(0);transform:scale(0)}\r\n  to {-webkit-transform:scale(1);transform:scale(1)}\r\n}\r\n/* The Close Button */\r\n.close {\r\n  position: absolute;\r\n  top: 15px;\r\n  right: 35px;\r\n  color: #f1f1f1;\r\n  font-size: 40px;\r\n  font-weight: bold;\r\n  transition: 0.3s;\r\n}\r\n.close:hover,\r\n.close:focus {\r\n  color: #bbb;\r\n  text-decoration: none;\r\n  cursor: pointer;\r\n}\r\n/* 100% Image Width on Smaller Screens */\r\n@media only screen and (max-width: 700px){\r\n  .modal-content {\r\n    width: 100%;\r\n  }\r\n}\r\nbutton.like{\r\n  width: 30px;\r\n  height: 30px;\r\n  margin: 0 auto;\r\n  border-radius: 50%;\r\n  color: rgba(0,150,136 ,1);\r\n  background-color:rgba(38,166,154 ,0.3);\r\n  border-color: rgba(0,150,136 ,1);\r\n  border-width: 1px;\r\n  font-size: 15px;\r\n}\r\nbutton.dislike{\r\n  width: 30px;\r\n  height: 30px;\r\n  margin: 0 auto;\r\n  border-radius: 50%;\r\n  color: rgba(255,82,82 ,1);\r\n  background-color: rgba(255,138,128 ,0.3);\r\n  border-color: rgba(255,82,82 ,1);\r\n  border-width: 1px;\r\n  font-size: 15px;\r\n}\r\n#success{\r\n  display: none;\r\n}\r\n#form{\r\n  margin-left: 30%;\r\n  margin-right: auto;\r\n  width: 100%\r\n}\r\n.label-viewInfo{\r\n  margin: 2px 0;\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 140px;\r\n  text-align: right;\r\n}\r\n.input-viewInfo {\r\n  text-align: left;\r\n  width: 200px;\r\n}\r\n.form-viewInfo {\r\n  width: 100%;\r\n  padding: 30px;\r\n}\r\n.form-center{\r\n  display: table-cell;\r\n}\r\n.saveChangesButton{\r\n  margin-left: 50%\r\n}\r\n"
 
 /***/ }),
 
@@ -158,7 +158,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tab\">\n  <button class=\"tablinks\" onclick=\"openTab(event, 'Newest')\">Newest</button>\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostP')\">Most Popular</button>\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostV')\">Most Viewed</button>\n</div>\n<h1>Newest Memes</h1>\n<!-- The Modal -->\n<div class=\"space\">\n  <cl-image (click)=\"openMeme($event)\" id=\"myImg\" *ngFor=\"let pic of pics\"\n            public-id= \"{{ pic }}\"\n            type=\"fetch\">\n    <cl-transformation\n      width=\"300\" height=\"300\" gravity=\"face\" crop=\"fill\" fetch-format=\"auto\">\n    </cl-transformation>\n  </cl-image>\n</div>\n<div id=\"myModal\" class=\"modal\">\n  <span (click)=\"closeMeme($event)\" class=\"close\">&times;</span>\n  <img [src]=\"url\" class=\"modal-content\" id=\"img01\">\n  <div id=\"caption\">\n    <input type=\"text\" value=\"Comments\" placeholder=\"Comment\">\n    <br>\n    <br>\n    <button class=\"dislike\">\n      <i class=\"fa fa-thumbs-o-down\" aria-hidden=\"true\"></i>\n    </button>\n    <button class=\"like\">\n      <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n    </button>\n  </div>\n</div>\n<br>\n<br>\n<input type=\"file\" (change)=\"onFileSelected($event)\">\n<br>\n<br>\n<button type=\"button\" (click)=\"onUpload($event)\">Upload</button>\n<br>\n<br>\n<div id=\"after\" (change)=\"onFileSelected($event)\">\n  <div id=\"myModals\" class=\"modals\">\n    <div class=\"modal-contents\">\n      <form class=\"form-viewInfo\">\n        <section class=\"form-center\">\n          <div class=\"form-group\">\n            <label class=\"label-viewInfo\" for=\"title\"> <b>Title:</b></label>\n            <input class=\"input-viewInfo\" type=\"text\" id=\"title\" name=\"title\" required><br>\n          </div>\n          <div class=\"form-group\">\n            <label class=\"label-viewInfo\" for=\"captions\"> <b>Caption:</b></label>\n            <input class=\"input-viewInfo\" type=\"text\" id=\"captions\" name=\"captions\" required><br>\n          </div>\n          <br>\n          <input class=\"saveChangesButton\" type=\"submit\" value=\"Save Changes\" (click)=\"saveChanges($event)\">\n        </section>\n      </form>\n    </div>\n  </div>\n</div>\n<div id=\"success\" class=\"alert alert-success\">\n  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you\n</div>\n"
+module.exports = "<div class=\"tab\">\n  <button class=\"tablinks\" onclick=\"openTab(event, 'Newest')\">Newest</button>\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostP')\">Most Popular</button>\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostV')\">Most Viewed</button>\n</div>\n<h1>Newest Memes</h1>\n<!-- The Modal -->\n<div class=\"space\" *ngFor='let p of post'>\n  <div id=\"head\"><h3 id=\"imgTitle\">{{ p.title }}</h3>\n    <br>\n    <p id=\"imgCaption\">{{ p.caption }}</p>\n  </div>\n  <cl-image (click)=\"openMeme($event)\" id=\"myImg\"\n            public-id= \"{{ p.url }}\"\n            type=\"fetch\">\n    <cl-transformation\n      width=\"400\" height=\"400\" gravity=\"face\" crop=\"fill\" fetch-format=\"auto\">\n    </cl-transformation>\n  </cl-image>\n</div>\n<div id=\"myModal\" class=\"modal\">\n  <span (click)=\"closeMeme($event)\" class=\"close\">&times;</span>\n\n  <img [src]=\"url\" class=\"modal-content\" id=\"img01\">\n  <div id=\"caption\">\n    <input type=\"text\" value=\"Comments\" placeholder=\"Comment\">\n    <button type=\"submit\"id=\"comment-submit\" (click)=\"comment($event)\">Comment</button>\n    <br>\n    <br>\n    <button class=\"dislike\">\n      <i class=\"fa fa-thumbs-o-down\" aria-hidden=\"true\"></i>\n    </button>\n    <button class=\"like\">\n      <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n    </button>\n  </div>\n</div>\n<br>\n<br>\n<input type=\"file\" (change)=\"onFileSelected($event)\">\n<br>\n<br>\n<div id=\"after\" (change)=\"onFileSelected($event)\">\n  <div id=\"myModals\" class=\"modals\">\n    <div class=\"modal-contents\">\n      <form class=\"form-viewInfo\">\n        <section class=\"form-center\">\n          <div class=\"form-group\">\n            <label class=\"label-viewInfo\" for=\"title\"> <b>Title:</b></label>\n            <input class=\"input-viewInfo\" type=\"text\" id=\"title\" name=\"title\" required><br>\n          </div>\n          <div class=\"form-group\">\n            <label class=\"label-viewInfo\" for=\"captions\"> <b>Caption:</b></label>\n            <input class=\"input-viewInfo\" type=\"text\" id=\"captions\" name=\"captions\" required><br>\n          </div>\n          <br>\n          <input class=\"saveChangesButton\" type=\"submit\" value=\"Save Changes\" (click)=\"saveChanges($event)\">\n        </section>\n      </form>\n    </div>\n  </div>\n</div>\n<div id=\"success\" class=\"alert alert-success\">\n  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you\n</div>\n"
 
 /***/ }),
 
@@ -192,21 +192,16 @@ var ImagesComponent = /** @class */ (function () {
     function ImagesComponent(http) {
         this.http = http;
         this.title = 'memeapp';
-        //array of pics
-        //conca to that url
-        //set that to pics
         this.url = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
-        this.pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
-            this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
-            this.url.concat('test/tgi3c18mm5tp9e03pm48.png'), this.url.concat('test/remokdpfydqh9ronf0gd.png'), this.url.concat('test/tr6ov0wld5tjcolkkaio.jpg')];
+        // pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
+        //   this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
+        //   this.url.concat('test/tgi3c18mm5tp9e03pm48.png'), this.url.concat('test/remokdpfydqh9ronf0gd.png'), this.url.concat('test/tr6ov0wld5tjcolkkaio.jpg')];
         this.CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/memecloud/upload/';
         this.CLOUDINARY_UPLOAD_PRESET = 'mybmtjtx';
         this.selectedFile = null;
     }
     ImagesComponent.prototype.ngOnInit = function () {
-    };
-    ;
-    ImagesComponent.prototype.onInit = function () {
+        var _this = this;
         fetch('http://localhost:8080/post-api', {
             method: 'GET',
             headers: {
@@ -222,14 +217,42 @@ var ImagesComponent = /** @class */ (function () {
                 }
             }
         }).then(function (val) {
+            console.log(val);
+            var len = val.length;
+            _this.post = val;
         }).catch(function (error) {
         });
     };
+    ;
     ImagesComponent.prototype.openMeme = function (event) {
         event.preventDefault();
         document.getElementById('myModal').style.display = "block";
         this.url = event.srcElement.currentSrc;
         document.getElementById("caption").style.display = "block";
+    };
+    ImagesComponent.prototype.comment = function (event) {
+        fetch('http://localhost:8080/comment-api/comment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+            },
+            body: JSON.stringify({
+                content: document.getElementById('uname1').value,
+                userID: localStorage.getItem('userId'),
+                postId: document.getElementById('img01')
+            })
+        }).then(function (res) {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                if (res.status == 401 || res.status == 400) {
+                    throw {};
+                }
+            }
+        }).catch(function (error) {
+        });
     };
     ImagesComponent.prototype.closeMeme = function (event) {
         event.preventDefault();
@@ -286,7 +309,9 @@ var ImagesComponent = /** @class */ (function () {
 }());
 
 function imageSaver(event, res) {
+    var url = 'https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/';
     console.log("got to image saver");
+    console.log(url);
     fetch('http://localhost:8080/post-api/post', {
         method: 'POST',
         headers: {
@@ -294,10 +319,10 @@ function imageSaver(event, res) {
             // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
         },
         body: JSON.stringify({
-            author: '1',
+            author: localStorage.getItem('userId'),
             title: document.getElementById('title').value,
             caption: document.getElementById('captions').value,
-            url: res.data.public_id
+            url: url.concat(res.data.public_id)
         })
     }).then(function (res) {
         if (res.ok) {

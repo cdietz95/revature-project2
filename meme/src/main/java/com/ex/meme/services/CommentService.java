@@ -3,6 +3,7 @@ package com.ex.meme.services;
 
 import com.ex.meme.dao.CommentDao;
 import com.ex.meme.entities.Comment;
+import com.ex.meme.entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,11 @@ public class CommentService {
     @Transactional(readOnly=true)
     public List<Comment> getAllComment() {
         return commentDao.findAll();
+    }
+
+    @Transactional(readOnly=true)
+    public List<Comment> getAllByPost(Post p) {
+        return commentDao.findAllByPostId(p);
     }
 
     public Integer addComment(Comment v) {

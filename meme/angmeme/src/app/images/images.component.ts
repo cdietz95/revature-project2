@@ -11,6 +11,8 @@ export class ImagesComponent implements OnInit {
   title = 'memeapp';
   url: String = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
   post;
+  pics : String[] = [];
+  comments;
 
   ngOnInit() {
     fetch('http://localhost:8080/post-api', {
@@ -28,8 +30,11 @@ export class ImagesComponent implements OnInit {
       }
     }).then( val => {
       console.log(val);
-      let len = val.length;
       this.post = val;
+      for (let v of val){
+        this.pics.push(v.url)
+      }
+
     }).catch(error => {
     });
   }
@@ -45,13 +50,71 @@ export class ImagesComponent implements OnInit {
 
   constructor(private http: HttpClient) {};
 
-
   openMeme(event){
+    let fullUrl = event.srcElement.currentSrc;
+    let splitUrl = fullUrl.split("fetch/")
     event.preventDefault();
     document.getElementById('myModal').style.display = "block";
     this.url = event.srcElement.currentSrc;
+    console.log( splitUrl[1].concat("fetch/").concat(splitUrl[2]))
     document.getElementById("caption").style.display = "block";
+    fetch('http://localhost:8080/comment-api/{c}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+
+      },
+      body: JSON.stringify({
+        postId:  splitUrl[1].concat("fetch/").concat(splitUrl[2])
+      })
+    }).then(res => {
+      console.log(res)
+      if (res.ok) {
+        return res.json();
+      } else {
+        if (res.status == 401 || res.status == 400) {
+          throw{};
+        }
+      }
+    }).then( val =>{
+      console.log(val);
+      this.comments = val;
+    }).catch(error => {
+    });
   }
+
+
+  comment(event){
+    //event.srcElement.currentSrc;
+    let fullUrl = document.getElementById('img01').src
+    let splitUrl = fullUrl.split("fetch/")
+    fetch('http://localhost:8080/comment-api/comment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+
+      },
+      body: JSON.stringify({
+        content: (<HTMLInputElement>document.getElementById('commentBox')).value,
+        userID: localStorage.getItem('userId'),
+        postId: splitUrl[1].concat("fetch/").concat(splitUrl[2])
+      })
+    }).then(res => {
+      console.log(res)
+      if (res.ok) {
+        return res.json();
+      } else {
+        if (res.status == 401 || res.status == 400) {
+          throw{};
+        }
+      }
+    }).catch(error => {
+    });
+  }
+
+
 
   closeMeme(event){
     event.preventDefault();
