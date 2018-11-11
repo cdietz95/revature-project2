@@ -139,6 +139,34 @@ export class ImagesComponent implements OnInit {
     this.onUpload(event);
   }
 
+  thumbs(thmbType){
+    console.log("thumb type is " + thmbType)
+    console.log(document.getElementById("img01").src);
+
+    fetch('http://localhost:8080/vote-api/vote', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+
+      },
+      body: JSON.stringify({
+        userID: localStorage.getItem('userId'),
+        voteValue: thmbType,
+        postId: document.getElementById('img01').src,
+      })
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        if (res.status == 401 || res.status == 400) {
+          throw{};
+        }
+      }
+    }).catch(error => {
+    });
+}
+
   onUpload(event){
     event.preventDefault();
     const fd = new FormData();
