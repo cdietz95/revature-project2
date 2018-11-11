@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\1809_sept24_java\revature-project2\meme\angmeme\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! D:\Revature-Project2.1\revature-project2\meme\angmeme\src\styles.css */"./src/styles.css");
 
 
 /***/ })

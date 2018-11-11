@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import axios from "axios";
@@ -87,7 +89,7 @@ export class ImagesComponent implements OnInit {
 
   comment(event){
     //event.srcElement.currentSrc;
-    let fullUrl = document.getElementById('img01').src
+    let fullUrl = event.srcElement.currentSrc
     let splitUrl = fullUrl.split("fetch/")
     fetch('http://localhost:8080/comment-api/comment', {
       method: 'POST',
@@ -141,7 +143,7 @@ export class ImagesComponent implements OnInit {
 
   thumbs(thmbType){
     console.log("thumb type is " + thmbType)
-    console.log(document.getElementById("img01").src);
+    console.log(document.getElementById("img01"));
 
     fetch('http://localhost:8080/vote-api/vote', {
       method: 'GET',
@@ -153,7 +155,7 @@ export class ImagesComponent implements OnInit {
       body: JSON.stringify({
         userID: localStorage.getItem('userId'),
         voteValue: thmbType,
-        postId: document.getElementById('img01').src,
+        postId: document.getElementById('img01'),
       })
     }).then(res => {
       if (res.ok) {
