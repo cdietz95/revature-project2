@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
+import { AppComponent } from "../app.component";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ngZone: NgZone) { }
 
   ngOnInit() {
+
   }
 
   noLogin =() => {
@@ -18,6 +20,13 @@ export class LoginComponent implements OnInit {
     // document.getElementById('noLogin').checked = false
   }
 
+  logout(event){
+    event.preventDefault();
+    localStorage.removeItem('profile');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    location.href = "http://localhost:4200";
+  }
 
   haveLogin = () => {
     document.getElementById("loginWrapper").style.display = 'block'
@@ -88,4 +97,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
 }
+
+

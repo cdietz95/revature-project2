@@ -1,6 +1,8 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <br>
-<app-login></app-login>
-<app-images></app-images>
+<app-banner></app-banner>
+  <app-login *ngIf="!isLogin && !isMine"></app-login>
+<app-images *ngIf="isLogin && !isMine"></app-images>
+<app-update *ngIf="isLogin && isMine"></app-update>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
