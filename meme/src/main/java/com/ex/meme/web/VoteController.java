@@ -64,19 +64,25 @@ public class VoteController {
      * @param url
      * @return
      */
-    @GetMapping(value="/{contentValue}")
-    public int getVotes(@PathVariable ("contentValue") Integer contentValue, String url) {
+    @CrossOrigin(origins =  "*")
+    @PostMapping(value="/votepls")
+    public int getVotes(@RequestBody Post x) {
 
-        System.out.println("Looking for post url: " + url);
+        System.out.println(x.getId());
 
-        Post p = postService.getPostByUrl(url);
+        System.out.println("Looking for post url: " + x.getUrl());
+        System.out.println("getVotes");
+        System.out.println("getVotes");
+        System.out.println("getVotes");
+        System.out.println("getVotes");
+        Post p = postService.getPostByUrl(x.getUrl());
 
 
        System.out.println("This is the post from the Database: " + p.toString());
 
-        System.out.println("This is the content number I'm looking for " + contentValue);
+        System.out.println("This is the content number I'm looking for " + x.getId());
 
-       int numberOfVotes = voteService.getVoteQuantatity(p, contentValue);
+       int numberOfVotes = voteService.getVoteQuantatity(p, x.getId());
 
 
         return numberOfVotes;
@@ -101,9 +107,8 @@ public class VoteController {
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/vote")
     public ResponseEntity addVote(@RequestBody Vote v, HttpServletResponse resp) {
-
+        System.out.println("got here");
         System.out.println("This is the passed in Vote value from the client " + v.toString());
-
 
         int target = v.getUserID().getId();
 
