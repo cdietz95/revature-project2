@@ -11,6 +11,7 @@ export class BannerComponent implements OnInit {
 
   static clicked = true
 
+
   constructor(private ngZone: NgZone) { }
 
   ngOnInit() {

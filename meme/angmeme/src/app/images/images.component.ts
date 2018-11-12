@@ -13,9 +13,12 @@ export class ImagesComponent implements OnInit {
   title = 'memeapp';
   url: String = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
   post;
+  downVote;
   pics : String[] = [];
   comments;
   static clicked = true;
+  postVar = localStorage.getItem('postVar')
+  comapreVar = localStorage.getItem('compareVar')
 
   ngOnInit() {
     fetch('http://localhost:8080/post-api', {
@@ -40,7 +43,10 @@ export class ImagesComponent implements OnInit {
 
     }).catch(error => {
     });
+    localStorage.setItem('postVar','p');
+    localStorage.setItem('comapreVar','p');
   }
+
 
   // pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
   //   this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
@@ -53,13 +59,15 @@ export class ImagesComponent implements OnInit {
 
   constructor(private http: HttpClient, private ngZone: NgZone) {};
 
-  openMeme(event){
+  openMeme(event) {
+    event.preventDefault();
+    let content = 0;
+    console.log(event.srcElement.currentSrc)
     let fullUrl = event.srcElement.currentSrc;
     let splitUrl = fullUrl.split("fetch/")
-    event.preventDefault();
     document.getElementById('myModal').style.display = "block";
     this.url = event.srcElement.currentSrc;
-    console.log( splitUrl[1].concat("fetch/").concat(splitUrl[2]))
+    console.log(splitUrl[1].concat("fetch/").concat(splitUrl[2]))
     document.getElementById("caption").style.display = "block";
     fetch('http://localhost:8080/comment-api/{c}', {
       method: 'POST',
@@ -69,7 +77,7 @@ export class ImagesComponent implements OnInit {
 
       },
       body: JSON.stringify({
-        postId:  splitUrl[1].concat("fetch/").concat(splitUrl[2])
+        postId: splitUrl[1].concat("fetch/").concat(splitUrl[2])
       })
     }).then(res => {
       console.log(res)
@@ -80,24 +88,25 @@ export class ImagesComponent implements OnInit {
           throw{};
         }
       }
-    }).then( val =>{
+    }).then(val => {
       console.log(val);
       this.comments = val;
     }).catch(error => {
     });
-  }
 
+  }
 
   comment(event){
     //event.srcElement.currentSrc;
-    let fullUrl = event.srcElement.currentSrc
+    //its fine
+    // @ts-ignore
+    let fullUrl = document.getElementById('img01').src
     let splitUrl = fullUrl.split("fetch/")
     fetch('http://localhost:8080/comment-api/comment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
         // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
-
       },
       body: JSON.stringify({
         content: (<HTMLInputElement>document.getElementById('commentBox')).value,
@@ -119,6 +128,7 @@ export class ImagesComponent implements OnInit {
 
 
 
+
   closeMeme(event){
     event.preventDefault();
     document.getElementsByClassName("close")[0];
@@ -136,10 +146,23 @@ export class ImagesComponent implements OnInit {
   }
 
   openNewest(event){
-
+    for(let i = 0; i < this.post.length; i++) {
+      for(let j = 0; j < this.post.length - 1; j++) {
+        if(this.post[j].createDateTime < this.post[j + 1].createDateTime) {
+          let swap = this.post[j];
+          this.post[j] = this.post[j + 1];
+          this.post[j + 1] = swap;
+        }
+      }
+    }
   }
 
   openPop(event){
+    this.ngZone.run(() => {
+      localStorage.setItem('postVar','p.vote');
+      localStorage.setItem('comapreVar','0');
+      location.href = "http://localhost:4200";
+    });
 
   }
 
