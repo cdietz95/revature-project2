@@ -16,6 +16,7 @@ export class ImagesComponent implements OnInit {
   pics : String[] = [];
   comments;
   static clicked = true;
+  x;
 
   ngOnInit() {
     fetch('http://localhost:8080/post-api', {
@@ -41,10 +42,6 @@ export class ImagesComponent implements OnInit {
     }).catch(error => {
     });
   }
-
-  // pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
-  //   this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
-  //   this.url.concat('test/tgi3c18mm5tp9e03pm48.png'), this.url.concat('test/remokdpfydqh9ronf0gd.png'), this.url.concat('test/tr6ov0wld5tjcolkkaio.jpg')];
 
   CLOUDINARY_URL: String  = 'https://api.cloudinary.com/v1_1/memecloud/upload/';
   CLOUDINARY_UPLOAD_PRESET: String = 'mybmtjtx';
@@ -90,7 +87,7 @@ export class ImagesComponent implements OnInit {
 
   comment(event){
     //event.srcElement.currentSrc;
-    let fullUrl = event.srcElement.currentSrc
+    let fullUrl = event.srcElement.currentSrc;
     let splitUrl = fullUrl.split("fetch/")
     fetch('http://localhost:8080/comment-api/comment', {
       method: 'POST',
@@ -140,6 +137,13 @@ export class ImagesComponent implements OnInit {
   }
 
   openPop(event){
+    let upVote : number[] = [];
+    console.log(this.x)
+    for(let i = 0; i < this.post.length; i++){
+      this.ThmbCnt(1, this.post[i].url);
+      console.log(this.x)
+      upVote.push(this.x)
+    }
 
   }
 
@@ -174,12 +178,15 @@ export class ImagesComponent implements OnInit {
     this.onUpload(event);
   }
 
-  thumbs(thmbType){
-    console.log("thumb type is " + thmbType)
-    console.log(thmbType.srcElement.currentSrc);
-
+  thumbs(event, thmbType){
+    // @ts-ignore
+    let fullUrl = document.getElementById('img01').src;
+    let splitUrl = fullUrl.split('fetch/');
+    let sendUrl = splitUrl[1].concat("fetch/").concat(splitUrl[2])
+    // console.log('Send url = ' + sendUrl);
+    // console.log('local store = ' + localStorage.getItem('userId'))
     fetch('http://localhost:8080/vote-api/vote', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
         // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
@@ -187,11 +194,19 @@ export class ImagesComponent implements OnInit {
       },
       body: JSON.stringify({
         userID: localStorage.getItem('userId'),
-        voteValue: thmbType,
-        postId: thmbType.srcElement.currentSrc
+        content: thmbType,
+        postId: sendUrl
       })
     }).then(res => {
       if (res.ok) {
+        switch (thmbType) {
+          case 0:
+            this.ThmbCnt(thmbType, sendUrl);
+            break;
+          case 1:
+            this.ThmbCnt(thmbType, sendUrl);
+            break;
+        }
         return res.json();
       } else {
         if (res.status == 401 || res.status == 400) {
@@ -201,6 +216,36 @@ export class ImagesComponent implements OnInit {
     }).catch(error => {
     });
 }
+
+
+
+  ThmbCnt(thmbType, sendURL){
+
+    fetch('http://localhost:8080/vote-api/votepls', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+
+      },
+      body: JSON.stringify({
+        id: thmbType,
+        url: sendURL
+      })
+    }).then(res => {
+      if (res.ok) {
+        console.log("this is the resp from dwnthmbcnt " + res)
+        return res.json();
+      } else {
+        if (res.status == 401 || res.status == 400) {
+          throw{};
+        }
+      }
+    }).then(val => {
+       this.x = val
+    }).catch(error => {
+    });
+  }
 
   onUpload(event){
     event.preventDefault();

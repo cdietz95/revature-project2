@@ -43,11 +43,9 @@ public class VoteService {
 
         System.out.println(voteDao.toString());
 
-        if(record == null)
-        {
+        if(record == null) {
             return voteDao.save(v).getId();
-        }else
-        {
+        }else {
             v.setId(record.getId());
             return voteDao.save(v).getId();
         }
