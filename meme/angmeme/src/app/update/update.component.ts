@@ -87,22 +87,27 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-
-  comment(event){
-    //event.srcElement.currentSrc;
-    let fullUrl = event.srcElement.currentSrc
+  updatePost(event) {
+    event.preventDefault();
+    // @ts-ignore
+    let fullUrl = document.getElementById('img01').src
     let splitUrl = fullUrl.split("fetch/")
-    fetch('http://localhost:8080/comment-api/comment', {
-      method: 'POST',
+
+    console.log((<HTMLInputElement>document.getElementById('newTitle')).value)
+    console.log((<HTMLInputElement>document.getElementById('newCaption')).value)
+
+    fetch('http://localhost:8080/post-api/post/{id}', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
         // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
 
       },
       body: JSON.stringify({
-        content: (<HTMLInputElement>document.getElementById('commentBox')).value,
-        userID: localStorage.getItem('userId'),
-        postId: splitUrl[1].concat("fetch/").concat(splitUrl[2])
+        urlValue: splitUrl[1].concat("fetch/").concat(splitUrl[2]),
+        id: localStorage.getItem('userId'),
+        title: (<HTMLInputElement>document.getElementById('newTitle')).value,
+        caption: (<HTMLInputElement>document.getElementById('newCaption')).value
       })
     }).then(res => {
       console.log(res)
@@ -115,8 +120,8 @@ export class UpdateComponent implements OnInit {
       }
     }).catch(error => {
     });
-  }
 
+  }
 
 
   closeMeme(event){
@@ -124,30 +129,6 @@ export class UpdateComponent implements OnInit {
     document.getElementsByClassName("close")[0];
     document.getElementById('myModal').style.display = "none";
   }
-
-
-  openTab(event){
-    console.log('open pics')
-    this.ngZone.run(() => {
-      console.log("open complete");
-      ImagesComponent.clicked = true
-    });
-  }
-
-  openNewest(event){
-
-  }
-
-  openPop(event){
-
-  }
-
-  openLeastPop(event){
-
-  }
-
-  openMostViewed(event){}
-
   logout(event){
     event.preventDefault();
     localStorage.removeItem('profile');
