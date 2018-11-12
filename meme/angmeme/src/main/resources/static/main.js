@@ -158,7 +158,7 @@ module.exports = "/* Style the tab */\r\n.tab {\r\n  overflow: hidden;\r\n  bord
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tab\">\n  <button class=\"tablinks\" onclick=\"openTab(event, 'Newest')\">Newest</button>\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostP')\">Most Popular</button>\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostV')\">Most Viewed</button>\n</div>\n<h1>Newest Memes</h1>\n<!-- The Modal -->\n<div class=\"space\" *ngFor='let p of post'>\n  <div id=\"head\"><h3 id=\"imgTitle\">{{ p.title }}</h3>\n    <br>\n    <p id=\"imgCaption\">{{ p.caption }}</p>\n  </div>\n  <cl-image (click)=\"openMeme($event)\" id=\"myImg\"\n            public-id= \"{{ p.url }}\"\n            type=\"fetch\">\n    <cl-transformation\n      width=\"400\" height=\"400\" gravity=\"face\" crop=\"fill\" fetch-format=\"auto\">\n    </cl-transformation>\n  </cl-image>\n</div>\n<div id=\"myModal\" class=\"modal\">\n  <span (click)=\"closeMeme($event)\" class=\"close\">&times;</span>\n\n  <img [src]=\"url\" class=\"modal-content\" id=\"img01\">\n  <div id=\"caption\">\n    <input type=\"text\" value=\"Comments\" placeholder=\"Comment\">\n    <button type=\"submit\"id=\"comment-submit\" (click)=\"comment($event)\">Comment</button>\n    <br>\n    <br>\n    <button class=\"dislike\">\n      <i class=\"fa fa-thumbs-o-down\" aria-hidden=\"true\"></i>\n    </button>\n    <button class=\"like\">\n      <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n    </button>\n  </div>\n</div>\n<br>\n<br>\n<input type=\"file\" (change)=\"onFileSelected($event)\">\n<br>\n<br>\n<div id=\"after\" (change)=\"onFileSelected($event)\">\n  <div id=\"myModals\" class=\"modals\">\n    <div class=\"modal-contents\">\n      <form class=\"form-viewInfo\">\n        <section class=\"form-center\">\n          <div class=\"form-group\">\n            <label class=\"label-viewInfo\" for=\"title\"> <b>Title:</b></label>\n            <input class=\"input-viewInfo\" type=\"text\" id=\"title\" name=\"title\" required><br>\n          </div>\n          <div class=\"form-group\">\n            <label class=\"label-viewInfo\" for=\"captions\"> <b>Caption:</b></label>\n            <input class=\"input-viewInfo\" type=\"text\" id=\"captions\" name=\"captions\" required><br>\n          </div>\n          <br>\n          <input class=\"saveChangesButton\" type=\"submit\" value=\"Save Changes\" (click)=\"saveChanges($event)\">\n        </section>\n      </form>\n    </div>\n  </div>\n</div>\n<div id=\"success\" class=\"alert alert-success\">\n  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you\n</div>\n"
+module.exports = "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n<div class=\"tab\">\r\n  <button class=\"tablinks\" onclick=\"openTab(event, 'Newest')\">Newest</button>\r\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostP')\">Most Popular</button>\r\n  <button class=\"tablinks\" onclick=\"openTab(event, 'MostV')\">Most Viewed</button>\r\n</div>\r\n<h1>Newest Memes</h1>\r\n<!-- The Modal -->\r\n<div class=\"space\" *ngFor='let p of post'>\r\n  <div id=\"head\"><h3 id=\"imgTitle\">{{ p.title }}</h3>\r\n    <br>\r\n    <p id=\"imgCaption\">{{ p.caption }}</p>\r\n  </div>\r\n  <cl-image (click)=\"openMeme($event)\" id=\"myImg\"\r\n            public-id= \"{{ p.url }}\"\r\n            type=\"fetch\">\r\n  </cl-image>\r\n</div>\r\n<div id=\"myModal\" class=\"modal\">\r\n  <span (click)=\"closeMeme($event)\" class=\"close\">&times;</span>\r\n\r\n  <img [src]=\"url\" class=\"modal-content\" id=\"img01\">\r\n  <div id=\"caption\">\r\n\r\n    <input type=\"text\" value=\"Comments\" id=\"commentBox\" placeholder=\"Comment\">\r\n    <button type=\"submit\"id=\"comment-submit\" (click)=\"comment($event)\">Comment</button>\r\n    <br>\r\n    <br>\r\n\r\n    <button class=\"dislike\">\r\n      <i class=\"fa fa-thumbs-o-down\" aria-hidden=\"true\" (click)=\"thumbs(0)\"></i>\r\n    </button>\r\n    <button class=\"like\">\r\n      <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\" (click)=\"thumbs(1)\"></i>\r\n    </button>\r\n\r\n    <div class=\"media\">\r\n      <div class=\"media-left\">\r\n      </div>\r\n      <br>\r\n      <div class=\"media-body\" *ngFor='let c of comments'>\r\n        <br>\r\n        <div>\r\n        <h4 id=\"commentUserName\" class=\"media-heading\">{{c.userID.username}}</h4>\r\n        <br>\r\n      <p id=\"commentContent\">{{c.content}}</p>\r\n        </div>\r\n        <br>\r\n      </div>\r\n      <br>\r\n    </div>\r\n\r\n    <br>\r\n    <br>\r\n    <input type=\"text\" value=\"Comments\" placeholder=\"Comment\">\r\n\r\n  </div>\r\n</div>\r\n<br>\r\n<br>\r\n<input type=\"file\" (change)=\"onFileSelected($event)\">\r\n<br>\r\n<br>\r\n<div id=\"after\" (change)=\"onFileSelected($event)\">\r\n  <div id=\"myModals\" class=\"modals\">\r\n    <div class=\"modal-contents\">\r\n      <form class=\"form-viewInfo\">\r\n        <section class=\"form-center\">\r\n          <div class=\"form-group\">\r\n            <label class=\"label-viewInfo\" for=\"title\"> <b>Title:</b></label>\r\n            <input class=\"input-viewInfo\" type=\"text\" id=\"title\" name=\"title\" required><br>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label class=\"label-viewInfo\" for=\"captions\"> <b>Caption:</b></label>\r\n            <input class=\"input-viewInfo\" type=\"text\" id=\"captions\" name=\"captions\" required><br>\r\n          </div>\r\n          <br>\r\n          <input class=\"saveChangesButton\" type=\"submit\" value=\"Save Changes\" (click)=\"saveChanges($event)\">\r\n        </section>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div id=\"success\" class=\"alert alert-success\">\r\n  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you\r\n</div>\r\n<div>\r\n  <button id=\"logout\" (click)=\"logout($event)\">Logout</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -193,6 +193,7 @@ var ImagesComponent = /** @class */ (function () {
         this.http = http;
         this.title = 'memeapp';
         this.url = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
+        this.pics = [];
         // pics = [this.url.concat('test/tmry7yys3f3w6tyzxj6a.png'), this.url.concat('test/nsdk5rlwelowxvocycdx.png'), this.url.concat('test/vqefmdlwgrxrpgbo3u2l.gif'),
         //   this.url.concat('test/efeh0npwyekchwhjcgbs.png'), this.url.concat('test/ij5qk3hbobgjwno45gxo.gif'), this.url.concat('test/sd0nlkeyqfvglrfogrhs'),
         //   this.url.concat('test/tgi3c18mm5tp9e03pm48.png'), this.url.concat('test/remokdpfydqh9ronf0gd.png'), this.url.concat('test/tr6ov0wld5tjcolkkaio.jpg')];
@@ -218,19 +219,53 @@ var ImagesComponent = /** @class */ (function () {
             }
         }).then(function (val) {
             console.log(val);
-            var len = val.length;
             _this.post = val;
+            for (var _i = 0, val_1 = val; _i < val_1.length; _i++) {
+                var v = val_1[_i];
+                _this.pics.push(v.url);
+            }
         }).catch(function (error) {
         });
     };
     ;
     ImagesComponent.prototype.openMeme = function (event) {
+        var _this = this;
+        var fullUrl = event.srcElement.currentSrc;
+        var splitUrl = fullUrl.split("fetch/");
         event.preventDefault();
         document.getElementById('myModal').style.display = "block";
         this.url = event.srcElement.currentSrc;
+        console.log(splitUrl[1].concat("fetch/").concat(splitUrl[2]));
         document.getElementById("caption").style.display = "block";
+        fetch('http://localhost:8080/comment-api/{c}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+            },
+            body: JSON.stringify({
+                postId: splitUrl[1].concat("fetch/").concat(splitUrl[2])
+            })
+        }).then(function (res) {
+            console.log(res);
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                if (res.status == 401 || res.status == 400) {
+                    throw {};
+                }
+            }
+        }).then(function (val) {
+            console.log(val);
+            _this.comments = val;
+        }).catch(function (error) {
+        });
     };
     ImagesComponent.prototype.comment = function (event) {
+        //event.srcElement.currentSrc;
+        var fullUrl = event.srcElement.currentSrc;
+        var splitUrl = fullUrl.split("fetch/");
         fetch('http://localhost:8080/comment-api/comment', {
             method: 'POST',
             headers: {
@@ -238,11 +273,12 @@ var ImagesComponent = /** @class */ (function () {
                 // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
             },
             body: JSON.stringify({
-                content: document.getElementById('uname1').value,
+                content: document.getElementById('commentBox').value,
                 userID: localStorage.getItem('userId'),
-                postId: document.getElementById('img01')
+                postId: splitUrl[1].concat("fetch/").concat(splitUrl[2])
             })
         }).then(function (res) {
+            console.log(res);
             if (res.ok) {
                 return res.json();
             }
@@ -259,6 +295,13 @@ var ImagesComponent = /** @class */ (function () {
         document.getElementsByClassName("close")[0];
         document.getElementById('myModal').style.display = "none";
     };
+    ImagesComponent.prototype.logout = function (event) {
+        event.preventDefault();
+        localStorage.removeItem('profile');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        location.href = "http://localhost:4200";
+    };
     ImagesComponent.prototype.onFileSelected = function (event) {
         event.preventDefault();
         this.selectedFile = event.target.files[0];
@@ -272,6 +315,32 @@ var ImagesComponent = /** @class */ (function () {
         console.log(document.getElementById('captions').value); //this is what I need to send back to the database (caption)
         document.getElementById("after").style.display = "none";
         this.onUpload(event);
+    };
+    ImagesComponent.prototype.thumbs = function (thmbType) {
+        console.log("thumb type is " + thmbType);
+        console.log(document.getElementById("img01"));
+        fetch('http://localhost:8080/vote-api/vote', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Authorization': 'Bearer ' + localStorage.getItem('profile')
+            },
+            body: JSON.stringify({
+                userID: localStorage.getItem('userId'),
+                voteValue: thmbType,
+                postId: document.getElementById('img01'),
+            })
+        }).then(function (res) {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                if (res.status == 401 || res.status == 400) {
+                    throw {};
+                }
+            }
+        }).catch(function (error) {
+        });
     };
     ImagesComponent.prototype.onUpload = function (event) {
         event.preventDefault();
@@ -535,7 +604,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\1809_sept24_java\revature-project2\meme\angmeme\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Revature-Project2.1\revature-project2\meme\angmeme\src\main.ts */"./src/main.ts");
 
 
 /***/ })

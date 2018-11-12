@@ -1,23 +1,26 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'Newest')">Newest</button>
-  <button class="tablinks" onclick="openTab(event, 'MostP')">Most Popular</button>
-  <button class="tablinks" onclick="openTab(event, 'MostV')">Most Viewed</button>
+  <button class="tablinks" (click)="openNewest($event)">Newest</button>
+  <button class="tablinks" (click)="openPop($event)">Most Popular</button>
+  <button class="tablinks" (click)="openLeastPop($event)">Least Popular</button>
+  <button class="tablinks" (click)="openMostViewed($event)">Most Viewed</button>
+  <button class="tablinks" (click)="openTab($event)">My Memes</button>
 </div>
 <h1>Newest Memes</h1>
-<!-- The Modal -->
-<div class="space" *ngFor='let p of post'>
-  <div id="head"><h3 id="imgTitle">{{ p.title }}</h3>
-    <br>
-    <p id="imgCaption">{{ p.caption }}</p>
+  <!-- The Modal -->
+  <div class="space" *ngFor='let p of post'>
+    <div id="head"><h3 id="imgTitle">{{ p.title }}</h3>
+      <br>
+      <p id="imgCaption">{{ p.caption }}</p>
+    </div>
+    <cl-image (click)="openMeme($event)" id="myImg"
+              public-id= "{{ p.url }}"
+              type="fetch">
+    </cl-image>
   </div>
-  <cl-image (click)="openMeme($event)" id="myImg"
-            public-id= "{{ p.url }}"
-            type="fetch">
-  </cl-image>
-</div>
-<div id="myModal" class="modal">
-  <span (click)="closeMeme($event)" class="close">&times;</span>
+  <div id="myModal" class="modal">
+    <span (click)="closeMeme($event)" class="close">&times;</span>
 
   <img [src]="url" class="modal-content" id="img01">
   <div id="caption">
@@ -83,4 +86,7 @@
 </div>
 <div id="success" class="alert alert-success">
   <strong>Success!</strong> Your submission was successful, and is now under review. Thank you
+</div>
+<div>
+  <button id="logout" (click)="logout($event)">Logout</button>
 </div>

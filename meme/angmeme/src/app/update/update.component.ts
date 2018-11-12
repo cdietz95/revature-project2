@@ -1,21 +1,21 @@
-
-
-import { Component, OnInit, NgZone } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import axios from "axios";
+import {ImagesComponent} from "../images/images.component";
 
 @Component({
-  selector: 'app-images',
-  templateUrl: './images.component.html',
-  styleUrls: ['./images.component.css']
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css']
 })
-export class ImagesComponent implements OnInit {
+export class UpdateComponent implements OnInit {
   title = 'memeapp';
   url: String = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
   post;
-  pics : String[] = [];
+  pics;
   comments;
-  static clicked = true;
+  static clicked : boolean = false;
+  id = localStorage.getItem('userId')
 
   ngOnInit() {
     fetch('http://localhost:8080/post-api', {
@@ -127,11 +127,10 @@ export class ImagesComponent implements OnInit {
 
 
   openTab(event){
+    console.log('open pics')
     this.ngZone.run(() => {
-      console.log('Meme Clicked')
-      console.log(ImagesComponent.clicked)
-      localStorage.setItem('isMine','true');
-      location.href = "http://localhost:4200";
+      console.log("open complete");
+      ImagesComponent.clicked = true
     });
   }
 
@@ -176,7 +175,7 @@ export class ImagesComponent implements OnInit {
 
   thumbs(thmbType){
     console.log("thumb type is " + thmbType)
-    console.log(thmbType.srcElement.currentSrc);
+    console.log(document.getElementById("img01"));
 
     fetch('http://localhost:8080/vote-api/vote', {
       method: 'GET',
@@ -188,7 +187,7 @@ export class ImagesComponent implements OnInit {
       body: JSON.stringify({
         userID: localStorage.getItem('userId'),
         voteValue: thmbType,
-        postId: thmbType.srcElement.currentSrc
+        postId: document.getElementById('img01'),
       })
     }).then(res => {
       if (res.ok) {
@@ -200,7 +199,7 @@ export class ImagesComponent implements OnInit {
       }
     }).catch(error => {
     });
-}
+  }
 
   onUpload(event){
     event.preventDefault();
