@@ -67,4 +67,20 @@ public class PostController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "*")
+    @PutMapping("/post/{id}")
+    public ResponseEntity updatePost(@PathVariable Integer id, String urlValue, String caption, String title)
+    {
+        Post p = postService.getPostByUrl(urlValue);
+        System.out.println("The Post in the table before any update" + p.toString());
+
+        if(caption != null) { p.setCaption(caption);}
+        if(title != null) {p.setTitle(title);}
+
+        System.out.println("The Post in the table after updates" + p.toString());
+
+
+        return new ResponseEntity(HttpStatus.valueOf(postService.updatePost(p)));
+    }
+
 }

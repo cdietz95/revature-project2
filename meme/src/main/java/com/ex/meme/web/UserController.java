@@ -75,6 +75,40 @@ public class UserController
         resp.setHeader("Location", "http://localhost:8080/user" + u.getId());
         return new ResponseEntity(HttpStatus.CREATED);
     }
+
+
+    /**
+     * @author Christina, Jon , Felipe
+     *
+     * PUT method that updates all of the users variables. If a parameter is not given
+     * then the user keeps their original information.
+     *
+     * @param id
+     * @param email
+     * @param firstN
+     * @param lastN
+     * @param username
+     * @param password
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @PutMapping("/user/{id}")
+    public ResponseEntity updateUser(@PathVariable Integer id, String email, String firstN, String lastN, String username, String password)
+    {
+        User u = userService.getUser(id);
+        System.out.println("The user in the table before any update" + u.toString());
+
+        if(email != null) { u.setEmail(email);}
+        if(firstN != null) {u.setFirstName(firstN);}
+        if(lastN != null){u.setLastName(lastN);}
+        if(username != null) {u.setUsername(username);}
+        if(password != null) {u.setPassword(password);}
+
+        System.out.println("The user in the table after updates" + u.toString());
+
+
+        return new ResponseEntity(HttpStatus.valueOf(userService.updateUser(u)));
+    }
 }
 
 

@@ -39,11 +39,20 @@ public class PostService {
     @Transactional(readOnly=true)
     public Post getPostByUrl(String url) {
 
-        System.out.println("Service URL : " + url);
+        //System.out.println("Service URL : " + url);
 
         Post p = postDao.findByUrl(url);
-        System.out.println("Service Post"+p.toString());
+        //System.out.println("Service Post"+p.toString());
         return p;
+    }
+
+    @Transactional
+    public Integer updatePost(Post p)
+    {
+        postDao.save(p);
+
+
+        return 200;
     }
 
 

@@ -46,6 +46,15 @@ public class UserService {
         }
     }
 
+    @Transactional
+    public Integer updateUser(User user)
+    {
+        userDao.save(user);
+
+
+        return 200;
+    }
+
     public Integer addUser(User u){
         return userDao.save(u).getId();
     }

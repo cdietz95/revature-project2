@@ -100,6 +100,8 @@ public class CommentController {
         System.out.println("This is the post from the Database: " +p.toString());
 
         c.setPostId(p);
+
+        ////////////////////////////////////////////////////////////////////
         System.out.println("Comment to be saved ! "  + c.toString());
 
         commentService.addComment(c);
