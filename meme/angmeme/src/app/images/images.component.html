@@ -26,13 +26,13 @@
   <div id="caption">
 
     <button class="dislike">
-      <i class="fa fa-thumbs-o-down" aria-hidden="true" (click)="thumbs($event, 0)"></i>
+      <i class="fa fa-thumbs-o-down" aria-hidden="true" (click)="thumbsCall($event, 0)"></i>
     </button>
-    <!--<span>{{thmbsDown}}</span>-->
+    <span>{{thmbsDown}}</span>
     <button class="like">
-      <i class="fa fa-thumbs-o-up" aria-hidden="true" (click)="thumbs($event, 1)"></i>
+      <i class="fa fa-thumbs-o-up" aria-hidden="true" (click)="thumbsCall($event, 1)"></i>
     </button>
-    <!--<span>{{thmbsUp}}</span>-->
+    <span>{{thmbsUp}}</span>
 
     <div class="media">
       <div class="media-left">

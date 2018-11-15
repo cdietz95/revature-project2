@@ -20,6 +20,8 @@ export class ImagesComponent implements OnInit {
   postVar = localStorage.getItem('postVar')
   comapreVar = localStorage.getItem('compareVar')
   x;
+  thmbsDown: number;
+  thmbsUp: number;
 
   ngOnInit() {
     fetch('http://localhost:8080/post-api', {
@@ -198,6 +200,21 @@ export class ImagesComponent implements OnInit {
     this.onUpload(event);
   }
 
+  thumbsCall(event, thmbType){
+    // @ts-ignore
+    let fullUrl = document.getElementById('img01').src;
+    let splitUrl = fullUrl.split('fetch/');
+    let sendUrl = splitUrl[1].concat("fetch/").concat(splitUrl[2])
+
+    if(thmbType === 0){
+      this.thumbs(event, thmbType);
+      this.ThmbCnt(1, sendUrl);
+    } else if (thmbType === 1) {
+      this.thumbs(event, thmbType);
+      this.ThmbCnt(0, sendUrl);
+    }
+  }
+
   thumbs(event, thmbType){
     // @ts-ignore
     let fullUrl = document.getElementById('img01').src;
@@ -254,7 +271,8 @@ export class ImagesComponent implements OnInit {
       })
     }).then(res => {
       if (res.ok) {
-        console.log("this is the resp from dwnthmbcnt " + res)
+        console.log("this is the resp from dwnthmbcnt " + res);
+
         return res.json();
       } else {
         if (res.status == 401 || res.status == 400) {
@@ -262,7 +280,14 @@ export class ImagesComponent implements OnInit {
         }
       }
     }).then(val => {
-       this.x = val
+        switch (thmbType) {
+          case 0:
+            this.thmbsDown = val;
+            break;
+          case 1:
+            this.thmbsUp = val;
+            break;
+        }
     }).catch(error => {
     });
   }
