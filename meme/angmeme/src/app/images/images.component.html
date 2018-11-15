@@ -1,12 +1,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <div class="tab">
   <button class="tablinks" (click)="openNewest($event)">Newest</button>
   <button class="tablinks" (click)="openPop($event)">Most Popular</button>
   <button class="tablinks" (click)="openLeastPop($event)">Least Popular</button>
   <button class="tablinks" (click)="openTab($event)">My Memes</button>
 </div>
-<h1>Newest Memes</h1>
+
+<input id="upload" type="file" (change)="onFileSelected($event)">
+<br>
+<br>
+<div id="after" (change)="onFileSelected($event)">
+  <div id="myModals" class="modals">
+    <div class="modal-contents">
+      <form class="form-viewInfo">
+        <section class="form-center">
+          <div class="form-group">
+            <label class="label-viewInfo" for="title"> <b>Title:</b></label>
+            <input class="input-viewInfo" type="text" id="title" name="title" required><br>
+          </div>
+          <div class="form-group">
+            <label class="label-viewInfo" for="captions"> <b>Caption:</b></label>
+            <input class="input-viewInfo" type="text" id="captions" name="captions" required><br>
+          </div>
+          <br>
+          <input class="saveChangesButton" type="submit" value="Save Changes" (click)="saveChanges($event)">
+        </section>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="success" class="alert alert-success">
+  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you
+</div>
+
+
+<h1>Some Memes</h1>
+
   <!-- The Modal -->
   <div class="space" *ngFor='let p of post'>
     <div id="head"><h3 id="imgTitle">{{ p.title }}</h3>
@@ -59,32 +90,7 @@
 </div>
 <br>
 <br>
-<input type="file" (change)="onFileSelected($event)">
-<br>
-<br>
-<div id="after" (change)="onFileSelected($event)">
-  <div id="myModals" class="modals">
-    <div class="modal-contents">
-      <form class="form-viewInfo">
-        <section class="form-center">
-          <div class="form-group">
-            <label class="label-viewInfo" for="title"> <b>Title:</b></label>
-            <input class="input-viewInfo" type="text" id="title" name="title" required><br>
-          </div>
-          <div class="form-group">
-            <label class="label-viewInfo" for="captions"> <b>Caption:</b></label>
-            <input class="input-viewInfo" type="text" id="captions" name="captions" required><br>
-          </div>
-          <br>
-          <input class="saveChangesButton" type="submit" value="Save Changes" (click)="saveChanges($event)">
-        </section>
-      </form>
-    </div>
-  </div>
-</div>
-<div id="success" class="alert alert-success">
-  <strong>Success!</strong> Your submission was successful, and is now under review. Thank you
-</div>
+
 <div>
   <button id="logout" (click)="logout($event)">Logout</button>
 </div>
