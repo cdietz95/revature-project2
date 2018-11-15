@@ -14,7 +14,7 @@ export class ImagesComponent implements OnInit {
   url: String = new String('https://res.cloudinary.com/memecloud/image/fetch/https://res.cloudinary.com/memecloud/image/upload/v1541178452/');
   post;
   downVote;
-  pics : String[] = [];
+  pics: String[] = [];
   comments;
   static clicked = true;
   postVar = localStorage.getItem('postVar')
@@ -25,7 +25,7 @@ export class ImagesComponent implements OnInit {
     fetch('http://localhost:8080/post-api', {
       method: 'GET',
       headers: {
-        'Content-Type' : 'application/json',
+        'Content-Type': 'application/json',
       }
     }).then(res => {
       if (res.ok) {
@@ -35,25 +35,26 @@ export class ImagesComponent implements OnInit {
           throw{};
         }
       }
-    }).then( val => {
+    }).then(val => {
       console.log(val);
       this.post = val;
-      for (let v of val){
+      for (let v of val) {
         this.pics.push(v.url)
       }
 
     }).catch(error => {
     });
-    localStorage.setItem('postVar','p');
-    localStorage.setItem('comapreVar','p');
+    localStorage.setItem('postVar', 'p');
+    localStorage.setItem('comapreVar', 'p');
   }
 
-  CLOUDINARY_URL: String  = 'https://api.cloudinary.com/v1_1/memecloud/upload/';
+  CLOUDINARY_URL: String = 'https://api.cloudinary.com/v1_1/memecloud/upload/';
   CLOUDINARY_UPLOAD_PRESET: String = 'mybmtjtx';
 
   selectedFile: File = null;
 
-  constructor(private http: HttpClient, private ngZone: NgZone) {};
+  constructor(private http: HttpClient, private ngZone: NgZone) {
+  };
 
   openMeme(event) {
     event.preventDefault();
@@ -92,7 +93,7 @@ export class ImagesComponent implements OnInit {
 
   }
 
-  comment(event){
+  comment(event) {
     //event.srcElement.currentSrc;
 
     //its fine
@@ -122,31 +123,30 @@ export class ImagesComponent implements OnInit {
       }
     }).catch(error => {
     });
+    // @ts-ignore
   }
 
 
-
-
-  closeMeme(event){
+  closeMeme(event) {
     event.preventDefault();
     document.getElementsByClassName("close")[0];
     document.getElementById('myModal').style.display = "none";
   }
 
 
-  openTab(event){
+  openTab(event) {
     this.ngZone.run(() => {
       console.log('Meme Clicked')
       console.log(ImagesComponent.clicked)
-      localStorage.setItem('isMine','true');
+      localStorage.setItem('isMine', 'true');
       location.href = "http://localhost:4200";
     });
   }
 
-  openNewest(event){
-    for(let i = 0; i < this.post.length; i++) {
-      for(let j = 0; j < this.post.length - 1; j++) {
-        if(this.post[j].createDateTime < this.post[j + 1].createDateTime) {
+  openNewest(event) {
+    for (let i = 0; i < this.post.length; i++) {
+      for (let j = 0; j < this.post.length - 1; j++) {
+        if (this.post[j].createDateTime < this.post[j + 1].createDateTime) {
           let swap = this.post[j];
           this.post[j] = this.post[j + 1];
           this.post[j + 1] = swap;
@@ -155,11 +155,18 @@ export class ImagesComponent implements OnInit {
     }
   }
 
-  openPop(event){
+  openPop(event) {
 
-    let upVote : number[] = [];
+    this.ngZone.run(() => {
+      localStorage.setItem('postVar', 'p.vote');
+      localStorage.setItem('comapreVar', '0');
+      location.href = "http://localhost:4200";
+    });
+
+
+    let upVote: number[] = [];
     console.log(this.x)
-    for(let i = 0; i < this.post.length; i++){
+    for (let i = 0; i < this.post.length; i++) {
       this.ThmbCnt(1, this.post[i].url);
       console.log(this.x)
       upVote.push(this.x)
@@ -167,13 +174,14 @@ export class ImagesComponent implements OnInit {
 
   }
 
-  openLeastPop(event){
+  openLeastPop(event) {
 
   }
 
-  openMostViewed(event){}
+  openMostViewed(event) {
+  }
 
-  logout(event){
+  logout(event) {
     event.preventDefault();
     localStorage.removeItem('profile');
     localStorage.removeItem('username');
@@ -185,7 +193,7 @@ export class ImagesComponent implements OnInit {
   onFileSelected(event) {
     event.preventDefault();
     this.selectedFile = <File>(<HTMLInputElement>event.target).files[0];
-    if(this.selectedFile != null) {
+    if (this.selectedFile != null) {
       document.getElementById("after").style.display = "block";
     }
   }
@@ -198,7 +206,7 @@ export class ImagesComponent implements OnInit {
     this.onUpload(event);
   }
 
-  thumbs(event, thmbType){
+  thumbs(event, thmbType) {
     // @ts-ignore
     let fullUrl = document.getElementById('img01').src;
     let splitUrl = fullUrl.split('fetch/');
@@ -235,11 +243,10 @@ export class ImagesComponent implements OnInit {
       }
     }).catch(error => {
     });
-}
+  }
 
 
-
-  ThmbCnt(thmbType, sendURL){
+  ThmbCnt(thmbType, sendURL) {
 
     fetch('http://localhost:8080/vote-api/votepls', {
       method: 'POST',
@@ -262,17 +269,17 @@ export class ImagesComponent implements OnInit {
         }
       }
     }).then(val => {
-       this.x = val
+      this.x = val
     }).catch(error => {
     });
   }
 
-  onUpload(event){
+  onUpload(event) {
     event.preventDefault();
     const fd = new FormData();
 
-    console.log((<HTMLInputElement>document.getElementById('title')).value +"1"); //this is what I need to send back to the database (title)
-    console.log((<HTMLInputElement>document.getElementById('captions')).value +"1"); //this is what I need to send back to the database (caption)
+    console.log((<HTMLInputElement>document.getElementById('title')).value + "1"); //this is what I need to send back to the database (title)
+    console.log((<HTMLInputElement>document.getElementById('captions')).value + "1"); //this is what I need to send back to the database (caption)
 
     fd.append('file', this.selectedFile);
     fd.append('upload_preset', 'mybmtjtx');
@@ -289,12 +296,12 @@ export class ImagesComponent implements OnInit {
       console.log(res);
       // location.reload();
       imageSaver(event, res);
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.log(err);
     });
   };
-}
 
+}
 
 function imageSaver(event, res) {
 
@@ -326,5 +333,5 @@ function imageSaver(event, res) {
   }).catch(error => {
   });
 
-}
 
+}
